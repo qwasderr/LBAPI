@@ -1,0 +1,36 @@
+version: '3.4'
+
+services:
+  lbapi:
+    image: ${DOCKER_REGISTRY-}lbapi
+    build:
+      context: .
+      dockerfile: LBAPI/Dockerfile
+    depends_on: 
+     - sqlserverService
+    networks:
+    - weathernet
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+    - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+    - "80"
+    - "443"
+  sqlserverService:
+    image: mcr.microsoft.com/mssql/server:latest
+    hostname: sqlserverService
+    container_name: sqlserverService
+    environment:
+        ACCEPT_EULA: Y
+        SA_PASSWORD: A123@aaa
+    volumes:
+    - ./data/mssql:/var/opt/mssql3
+    ports:
+    - 1443:1443
+    networks:
+    - weathernet
+networks:
+  weathernet:
+    driver: bridge
+
+
