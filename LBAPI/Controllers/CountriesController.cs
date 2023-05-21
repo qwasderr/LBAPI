@@ -14,8 +14,8 @@ namespace LBAPI.Controllers
         public CountriesController(LBAPIContext context)
         {
             _context = context;
-            //context.Countries.Add(new Country {Name = "asas", Rating = 111 });
-            //context.SaveChanges();
+         //   context.Countries.Add(new Country {Name = "asas", Rating = 111 });
+         //   context.SaveChanges();
         }
 
         // GET: api/Countries
